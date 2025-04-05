@@ -21,17 +21,23 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public Optional<User> buscarPorId(@PathVariable Long id) {
+    public Optional<User> findById(@PathVariable Long id) {
         return service.findById(id);
     }
 
     @PostMapping
-    public User criar(@RequestBody User usuario) {
-        return service.save(usuario);
+    public User save(@RequestBody User user) {
+        return service.save(user);
+    }
+
+    @PutMapping(value = "/{id}")
+    public User update(@PathVariable Long id, @RequestBody User user){
+        user = service.update(id, user);
+        return user;
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         service.delete(id);
     }
 }
